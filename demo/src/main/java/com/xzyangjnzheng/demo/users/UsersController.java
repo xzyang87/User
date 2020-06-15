@@ -1,15 +1,32 @@
 package com.xzyangjnzheng.demo.users;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
 public class UsersController {
+    private final UsersService usersService; // TODO: RequiredArgsConstructor does not work
+
+    public UsersController(UsersService usersService) {
+        this.usersService = usersService;
+    }
 
     @GetMapping
-    public String index() {
-        return "123";
+    public List<User> getUsers() {
+        return usersService.getUsers();
+    }
+
+    @PostMapping
+    public void createUser(@RequestBody User user) {
+        usersService.createUser(user);
+    }
+
+    @RequestMapping("/testconnection")
+    public String testConnection() {
+        return "connection successful";
     }
 }
