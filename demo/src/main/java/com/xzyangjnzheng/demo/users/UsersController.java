@@ -1,4 +1,4 @@
-package com.xzyangjnzheng.demo;
+package com.xzyangjnzheng.demo.users;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

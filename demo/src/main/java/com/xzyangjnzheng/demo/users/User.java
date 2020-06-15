@@ -1,4 +1,4 @@
-package com.xzyangjnzheng.demo;
+package com.xzyangjnzheng.demo.users;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -13,11 +13,11 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String name;
 
-    private long age;
+    private Long age;
 
     @CreationTimestamp
     private Date createdAt;
