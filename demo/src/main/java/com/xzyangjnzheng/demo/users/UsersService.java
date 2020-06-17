@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class UsersService {
-    private final UsersRepository usersRepository; // TODO: RequiredArgsConstructor does not work
+    private final UsersRepository usersRepository;
 
     public List<User> getUsers() {
         return usersRepository.findAll();

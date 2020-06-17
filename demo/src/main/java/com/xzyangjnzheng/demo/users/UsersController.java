@@ -9,7 +9,7 @@ import java.util.List;
 @RequestMapping("/users")
 @RequiredArgsConstructor
 public class UsersController {
-    private final UsersService usersService; // TODO: RequiredArgsConstructor does not work
+    private final UsersService usersService;
 
     @GetMapping
     public List<User> getUsers() {
