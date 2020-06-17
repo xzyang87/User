@@ -11,10 +11,6 @@ import java.util.List;
 public class UsersController {
     private final UsersService usersService; // TODO: RequiredArgsConstructor does not work
 
-    public UsersController(UsersService usersService) {
-        this.usersService = usersService;
-    }
-
     @GetMapping
     public List<User> getUsers() {
         return usersService.getUsers();
