@@ -47,3 +47,18 @@ jacocoTestReport {
 		html.destination file("${buildDir}/jacocoHtml")
 	}
 }
+
+jacocoTestCoverageVerification {
+	violationRules {
+		rule {
+			element = 'CLASS'
+			limit {
+				counter = 'LINE'
+				value = 'COVEREDRATIO'
+				minimum = 1.0
+			}
+			excludes = []
+		}
+	}
+}
+

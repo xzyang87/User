@@ -1,7 +1,5 @@
-package com.xzyangjnzheng.demo;
+package com.xzyangjnzheng.demo.users;
 
-import com.xzyangjnzheng.demo.users.User;
-import com.xzyangjnzheng.demo.users.UsersService;
 import net.bytebuddy.utility.RandomString;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
