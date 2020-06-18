@@ -26,7 +26,7 @@ public class UsersControllerTest {
 
     @Test
     void ShouldGetExpectedUsers() throws Exception {
-        mvc.perform(get("/users"))
+        mvc.perform(get("/users/all"))
                 .andExpect(status().isOk());
 
         verify(usersService, times(1)).getUsers();

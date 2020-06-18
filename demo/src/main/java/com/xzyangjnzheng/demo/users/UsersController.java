@@ -11,9 +11,17 @@ import java.util.List;
 public class UsersController {
     private final UsersService usersService;
 
-    @GetMapping
-    public List<User> getUsers() {
+    @GetMapping("/all")
+    public List<User> getAllUsers() {
         return usersService.getUsers();
+    }
+
+    @GetMapping
+    public List<User> getAllUsers(
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "2") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy) {
+        return usersService.getUsers(pageNo, pageSize, sortBy);
     }
 
     @PostMapping
