@@ -20,9 +20,4 @@ public class UsersController {
     public void createUser(@RequestBody User user) {
         usersService.createUser(user);
     }
-
-    @RequestMapping("/testconnection")
-    public String testConnection() {
-        return "connection successful";
-    }
 }
