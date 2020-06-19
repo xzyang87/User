@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,6 +28,14 @@ public class UsersService {
         }
 
         return new ArrayList<User>();
+    }
+
+    public List<User> getUsersByNameAndAge(String name, Integer age) {
+        return usersRepository.findByNameAndAge(name, age);
+    }
+
+    public List<User> getUsersBetween(Date after, Date before) {
+        return usersRepository.findByCreatedAtBetween(after, before);
     }
 
     public void createUser(User user) {
