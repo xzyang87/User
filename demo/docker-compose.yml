@@ -5,18 +5,28 @@ services:
     container_name: spring-homework-docker 
     build: ./
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://dbpostgresql:5432/test            
-      - SPRING_DATASOURCE_USERNAME=newuser
-      - SPRING_DATASOURCE_PASSWORD=postgres
+            # - SPRING_DATASOURCE_URL=jdbc:postgresql://dbpostgresql:5432/test            
+            # - SPRING_DATASOURCE_USERNAME=newuser
+            # - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_PROFILES_ACTIVE=test
     ports:
       - "8080:8080"
     depends_on:
-      - dbpostgresql
-  dbpostgresql:
+      - dbpostgresql-test
+      - dbpostgresql-prod
+  dbpostgresql-test:
     image: postgres
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=newuser
-      - POSTGRES_DB=test
+      - POSTGRES_PASSWORD=testpassword
+      - POSTGRES_USER=testuser
+      - POSTGRES_DB=testdb
+  dbpostgresql-prod:
+    image: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_PASSWORD=prodpassword
+      - POSTGRES_USER=produser
+      - POSTGRES_DB=proddb
