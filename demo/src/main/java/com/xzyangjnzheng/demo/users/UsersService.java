@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +19,11 @@ public class UsersService {
 
     public List<User> getUsers() {
         return usersRepository.findAll();
+    }
+
+    public User getUserById(Long id) {
+        List<User> users = usersRepository.findAllById(Arrays.asList(id));
+        return users.size() == 1 ? users.get(0) : null;
     }
 
     public List<User> getUsers(Integer pageNo, Integer pageSize, String sortBy) {
