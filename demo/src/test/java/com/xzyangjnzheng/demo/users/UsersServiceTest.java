@@ -17,6 +17,7 @@ public class UsersServiceTest {
     @Autowired
     private UsersService usersService;
 
+    /*
     @Test
     public void ShouldGetExpectedUsers() {
         usersService.getUsers();
@@ -30,4 +31,6 @@ public class UsersServiceTest {
 
         verify(usersRepository, times(1)).save(user);
     }
+
+     */
 }
