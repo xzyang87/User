@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,6 +22,8 @@ public class UsersController {
     @Autowired
     EmailInfoServiceClient emailInfoServiceClient;
 
+    private final RestTemplate restTemplate;
+
     private final UsersService usersService;
 
     @Value("${circuit.retryTime: default value}")
@@ -33,6 +36,18 @@ public class UsersController {
         // and you will get the value configed here: https://github.com/xzyang87/configManager/blob/master/user.yml
         // We can use it in the circuit breaker implementation later.
         return "This is the config from config server about circuit RetryTimes: " + circuitRetryTimes;
+    }
+
+//    @GetMapping("test-gateway")
+//    public String getEmailByGateway(@RequestParam(defaultValue = "") String userId) {
+//        String emailUrl = String.format("http://gateway-server/emails/%s", userId);
+//        String result = restTemplate.getForObject(emailUrl, String.class);
+//        return "result: " + result;
+//    }
+
+    @GetMapping("test-gateway")
+    public String getEmailByGateway() {
+        return "result ok";
     }
 
     @GetMapping("user-info")
