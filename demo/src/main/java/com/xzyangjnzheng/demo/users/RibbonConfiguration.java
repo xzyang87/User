@@ -8,13 +8,17 @@ import com.netflix.loadbalancer.PingUrl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 
-public class EmailConfiguration {
+public class RibbonConfiguration {
 
     @Autowired
     IClientConfig ribbonClientConfig;
 
     @Bean
     public IPing ribbonPing(IClientConfig config) {
+//        String pingPath = "/actuator/health";
+//        IPing ping = new PingUrl(false, pingPath);
+//        log.info("Configuring ping URI to [{}]", pingPath);
+//        return ping;
         return new PingUrl();
     }
 

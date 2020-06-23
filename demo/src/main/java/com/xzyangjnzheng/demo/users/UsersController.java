@@ -3,11 +3,9 @@ package com.xzyangjnzheng.demo.users;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
-import org.springframework.context.annotation.Bean;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,17 +15,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
-@RibbonClient(name = "email", configuration = EmailConfiguration.class)
+@RibbonClient(name = "email", configuration = RibbonConfiguration.class)
 public class UsersController {
 
-    @LoadBalanced
-    @Bean
-    RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
+//    @LoadBalanced
+//    @Bean
+//    RestTemplate restTemplate() {
+//        return new RestTemplate();
+//    }
+//
+//    @Autowired
+//    RestTemplate restTemplate;
 
     @Autowired
-    RestTemplate restTemplate;
+    EmailInfoServiceClient emailInfoServiceClient;
 
     private final UsersService usersService;
 
@@ -45,8 +46,7 @@ public class UsersController {
 
     @GetMapping("user-info")
     public String getUserInfo(@RequestParam(defaultValue = "") String userId) {
-        String url = String.format("http://email/emails/%s", userId);
-        String email = restTemplate.getForObject(url, String.class);
+        String email = emailInfoServiceClient.getEmailInfo(userId);
         return "userinfo: " + email;
     }
 
