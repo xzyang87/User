@@ -2,6 +2,7 @@ package com.xzyangjnzheng.demo.users;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.context.annotation.Bean;
@@ -29,6 +30,18 @@ public class UsersController {
     RestTemplate restTemplate;
 
     private final UsersService usersService;
+
+    @Value("${circuit.retryTime: default value}")
+    private String circuitRetryTimes;
+
+    @GetMapping("getConfig")
+    public String test() {
+        // just a demo endpoint, we can delete it later.
+        // Try it by visit: http://localhost:8080/users/getConfig,
+        // and you will get the value configed here: https://github.com/xzyang87/configManager/blob/master/user.yml
+        // We can use it in the circuit breaker implementation later.
+        return "This is the config from config server about circuit RetryTimes: " + circuitRetryTimes;
+    }
 
     @GetMapping("user-info")
     public String getUserInfo(@RequestParam(defaultValue = "") String userId) {
