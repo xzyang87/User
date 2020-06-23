@@ -1,7 +1,10 @@
 package com.xzyangjnzheng.demo.users;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,7 +15,22 @@ import java.util.List;
 @RequestMapping("/users")
 @RequiredArgsConstructor
 public class UsersController {
+    @Bean
+    RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
+    @Autowired
+    RestTemplate restTemplate;
+
     private final UsersService usersService;
+
+    @GetMapping("user-info")
+    public String getUserInfo(@RequestParam(defaultValue = "") String userId) {
+        String url = String.format("http://localhost:8081/emails/%s", userId);
+        String email = restTemplate.getForObject(url, String.class);
+        return "userinfo: " + email;
+    }
 
     @GetMapping("/all")
     public List<User> getUsers() {
