@@ -18,15 +18,6 @@ import java.util.List;
 @RibbonClient(name = "email", configuration = RibbonConfiguration.class)
 public class UsersController {
 
-//    @LoadBalanced
-//    @Bean
-//    RestTemplate restTemplate() {
-//        return new RestTemplate();
-//    }
-//
-//    @Autowired
-//    RestTemplate restTemplate;
-
     @Autowired
     EmailInfoServiceClient emailInfoServiceClient;
 
